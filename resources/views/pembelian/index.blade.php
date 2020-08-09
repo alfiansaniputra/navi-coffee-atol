@@ -5,7 +5,7 @@
 @section('content')
 <div class="flexbox mb-4">
   <div class="flexbox">
-<a class="mb-2 mr-2 btn btn-primary active" href="{{route('admin.pembelian-tambah')}}"><i class="fa fa-plus"></i> Tambah Data</a>
+<!-- <a class="mb-2 mr-2 btn btn-primary active" href="{{route('admin.pembelian-tambah')}}"><i class="fa fa-plus"></i> Tambah Data</a> -->
   </div>
 
   <div class="input-group-icon input-group-icon-left mr-3">

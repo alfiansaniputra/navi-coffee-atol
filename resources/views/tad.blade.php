@@ -13,12 +13,13 @@
     <link href="{{url('assets/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" />
     <link href="{{url('assets/vendors/line-awesome/css/line-awesome.min.css')}}" rel="stylesheet" />
     <link href="{{url('assets/vendors/themify-icons/css/themify-icons.css')}}" rel="stylesheet" />
-    <link href="{{url('assets/vendors/animate.css/animate.min.css')}}" rel="stylesheet" />
+    <!-- <link href="{{url('assets/vendors/animate.css/animate.min.css')}}" rel="stylesheet" /> -->
     <link href="{{url('assets/vendors/toastr/toastr.min.css')}}" rel="stylesheet" />
     <link href="{{url('assets/vendors/bootstrap-select/dist/css/bootstrap-select.min.css')}}" rel="stylesheet" />
+    <link href="{{url('assets/vendors/jvectormap/jquery-jvectormap-2.0.3.css')}}" rel="stylesheet" />
     <!-- PLUGINS STYLES-->
     @yield('css')
-    <link href="{{url('assets/vendors/dataTables/datatables.min.css')}}" rel="stylesheet" />
+    <!-- <link href="{{url('assets/vendors/dataTables/datatables.min.css')}}" rel="stylesheet" /> -->
     <!-- THEME STYLES-->
     <link href="{{url('assets/css/main.min.css')}}" rel="stylesheet" />
     <link href="{{url('index.css')}}" rel="stylesheet" />
@@ -162,7 +163,9 @@
           {{Session::get('message')}}
         </div>
         @endif
-            <div class="page-content fade-in-up">
+
+                                    @yield('content')
+            <!-- <div class="page-content fade-in-up">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="ibox">
@@ -170,7 +173,6 @@
                                 <div class="ibox-title">@yield('title')</div>
                             </div>
                             <div class="ibox-body">
-                                    @yield('content')
                             </div>
                             <div class="ibox-footer">
                                     @yield('footer')
@@ -178,7 +180,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             @yield('content2')
             <!-- END PAGE CONTENT-->
             <footer class="page-footer">
@@ -188,7 +190,7 @@
         </div>
     </div>
     <!-- START SEARCH PANEL-->
-    <form class="search-top-bar" action="http://admincast.com/adminca/preview/admin_1/html/search.html">
+    <form class="search-top-bar" action="">
         <input class="form-control search-input" type="text" placeholder="Search...">
         <button class="reset input-search-icon"><i class="ti-search"></i></button>
         <button class="reset input-search-close" type="button"><i class="ti-close"></i></button>
@@ -244,12 +246,18 @@
     <script src="{{url('assets/vendors/jquery-validation/dist/jquery.validate.min.js')}}"></script>
     <script src="{{url('assets/vendors/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
     <!-- PAGE LEVEL PLUGINS-->
+    <script src="{{url('assets/vendors/chart.js/dist/Chart.min.js')}}"></script>
+    <script src="{{url('assets/vendors/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js')}}"></script>
+    <script src="{{url('assets/vendors/jvectormap/jquery-jvectormap-2.0.3.min.js')}}"></script>
+    <script src="{{url('assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
     <!-- CORE SCRIPTS-->
-    <script src="{{url('assets/vendors/dataTables/datatables.min.js')}}"></script>
+    <script src="{{url('assets/js/scripts/dashboard_visitors.js')}}"></script>
+    <!-- <script src="{{url('assets/vendors/dataTables/datatables.min.js')}}"></script> -->
     <script src="{{url('assets/js/app.min.js')}}"></script>
+    
       @yield('js')
     <!-- PAGE LEVEL SCRIPTS-->
-        <script>
+        <!-- <script>
         $(function() {
             $('#datatable').DataTable({
                 pageLength: 10,
@@ -261,7 +269,7 @@
                     orderable: false
                 }]
             });
-
+        
             var table = $('#datatable').DataTable();
             $('#key-search').on('keyup', function() {
                 table.search(this.value).draw();
@@ -270,7 +278,7 @@
                 table.column(4).search($(this).val()).draw();
             });
         });
-    </script>
+            </script> -->
         
 
 </body>

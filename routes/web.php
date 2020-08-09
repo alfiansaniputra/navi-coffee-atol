@@ -68,12 +68,13 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function() {
 	Route::get('resep/{id}', 'AdminController@resepdetail')->name('resep-detail');
   	Route::get('resep/{id}/delete','AdminController@resephapus');
 	//data akun DIKESAMPINGKAN
-	// Route::get('akun', 'AdminController@akun');
-	// Route::get('akun/tambah', 'AdminController@akuncreate')->name('akun-tambah');
-	// Route::post('akun/tambah', 'AdminController@akunstore');
-	// Route::get('akun/{id}/edit', 'AdminController@akunedit')->name('akun-edit');
-	// Route::put('akun/{id}','AdminController@akunupdate');
-	// Route::get('akun/{id}', 'AdminController@akundetail')->name('akun-detail');
+	Route::get('akun', 'AdminController@akun');
+	Route::get('akun/tambah', 'AdminController@akuncreate')->name('akun-tambah');
+	Route::post('akun/tambah', 'AdminController@akunstore');
+	Route::get('akun/{id}/edit', 'AdminController@akunedit')->name('akun-edit');
+	Route::put('akun/{id}','AdminController@akunupdate');
+	Route::get('akun/{id}', 'AdminController@akundetail')->name('akun-detail');
+  	Route::get('akun/{id}/delete','AdminController@akunhapus');
 	//data pembelian
 	Route::get('pembelian', 'AdminController@pembelian');
 	Route::get('pembelian/tambah', 'AdminController@pembeliancreate')->name('pembelian-tambah');

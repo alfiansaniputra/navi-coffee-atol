@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Pembelian_kopi;
 use App\Kopi;
@@ -15,40 +16,20 @@ use App\User;
 
 class AdminController extends Controller
 {
-
-    public function pembeli()
-    {
-         $pembeli = User::all();
-         return view('pembeli.index',['pembeli' => $pembeli]);
-    }
-    //
     public function index()
     {
-         return view('admin.index');
-    }
-
-    public function create()
-    {
-        return view('pembeli.tambah');
-    }
-
-    public function store(Request $request)
-    {
-        $pembeli = new User;
-        $pembeli->name = $request->name;
-        $pembeli->email = $request->email;
-        $pembeli->password = $request->password;
-        $pembeli->save();
-        return redirect('pembeli')->with(['message' => 'Data Pelanggan Berhasil dibuat']);
+        $akun = User::where('role','=','pelanggan')->count();
+        $pembelian = Pembelian::all()->count();
+        $kopi = Kopi::where('tampil','=','1')->count();
+        $resep = Resep::where('tampil','=','1')->count();
+        $bahan_baku = Bahan_baku::where('tampil','=','1')->count();
+        $suplier = Suplier::where('tampil','=','1')->count();
+         return view('admin.index',compact('akun','pembelian','kopi','resep','bahan_baku','suplier'));
     }
 //data kopi
     public function kopi()
     {
          $kopi = Kopi::where('tampil','=','1')->get();
-        // $kategori=Kategori::all();
-        // $storage=Storage::all();
-        // $warna=Warna::all();
-         // return view('kopi.index',['kopi' => $kopi]);
          return view('kopi.index',compact('kopi'));
     }
     public function kopicreate()
@@ -255,21 +236,6 @@ class AdminController extends Controller
          $pembayaran = Pembayaran::all();
          return view('pembelian.index',compact('pembelian','users','pembelian_kopi','pembayaran'));
     }
-    // public function pembeliancreate()
-    // {   
-    //      $kopi = Kopi::where('tampil','=','1')->get();
-    //      $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
-    //      return view('pembelian.tambah',compact('kopi','bahanbaku'));
-    // }
-    // public function pembelianstore(Request $request)
-    // {
-    //     $pembelian = new pembelian;
-    //     $pembelian->id_kopi = $request->id_kopi;
-    //     $pembelian->id_bahan_baku = $request->id_bahan_baku;
-    //     $pembelian->qty = $request->qty;
-    //     $pembelian->save();
-    //     return redirect('admin/pembelian')->with(['message' => 'Data pembelian Berhasil dibuat']);
-    // }
     public function pembelianedit($id)
     {
       $pembelian = Pembelian::find($id);
@@ -299,25 +265,68 @@ class AdminController extends Controller
         $pembelian ->delete();
         return redirect('admin/pembelian')->with('message','Data berhasil dihapus');
     }
-
-
-
-
-    public function kategori()
+//data akun
+    public function akun()
+        {
+             $akun = User::all();
+             return view('akun.index',['akun' => $akun]);
+        }
+    public function akundetail($id)
     {
-         $kategori = Kategori::all();
-         return view('kategori.index',['kategori' => $kategori]);
+      $akun = User::find($id);
+      return view('akun.detail',compact('akun'));
     }
-    public function storage()
+    public function akuncreate()
+    {   
+         return view('akun.tambah');
+    }
+    public function akunstore(Request $request)
     {
-         $storage = Storage::all();
-         return view('storage.index',['storage' => $storage]);
+        $akun = new User;
+        $akun->name = $request->name;
+        $akun->email = $request->email;
+        $akun->password = Hash::make($request->password);
+        $akun->role = $request->role;
+        $akun->no_hp = $request->no_hp;
+        $akun->alamat = $request->alamat;
+        $akun->provinsi = $request->provinsi;
+        $akun->kabupaten = $request->kabupaten;
+        $akun->kodepos = $request->kodepos;
+        $akun->save();
+        return redirect('admin/akun')->with(['message' => 'Data Akun Berhasil dibuat']);
     }
-    public function warna()
-    {
-         $warna = Warna::all();
-         return view('warna.index',['warna' => $warna]);
+    public function akunedit($id)
+    {   
+      $akun = User::find($id);
+      return view('akun.edit',compact('akun'));
     }
+
+    public function akunupdate(Request $request, $id)
+    {   
+      $akun = User::find($id);
+      $akun->name = $request->name;
+      $akun->email = $request->email;
+      // $akun->password = Hash::make($request->password);
+      $akun->role = $request->role;
+      $akun->no_hp = $request->no_hp;
+      $akun->alamat = $request->alamat;
+      $akun->provinsi = $request->provinsi;
+      $akun->kabupaten = $request->kabupaten;
+      $akun->kodepos = $request->kodepos;
+      $akun->save();
+      return redirect('admin/akun')->with(['message' => 'Data Akun Berhasil di edit']);
+    }
+
+    public function akunhapus(Request $request, $id)
+    {   
+      $pw = "navicoffee";
+      $akun = User::find($id);
+      $akun->password = Hash::make($pw);
+      $akun->save();
+      return redirect('admin/akun')->with(['message' => 'Data Password Berhasil di ubah, Password diubah menjadi "navicoffee" *tampa tanda petik']);
+    }
+    
+    
     
 
 }
