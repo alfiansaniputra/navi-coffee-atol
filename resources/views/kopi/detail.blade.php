@@ -4,11 +4,11 @@
 @section('content')
 @if(count($errors)>0)
 <ul class="text-danger">
-    @foreach($errors->all() as $error)
-    <li>
-        {{$error}}
-    </li>
-    @endforeach
+	@foreach($errors->all() as $error)
+	<li>
+		{{$error}}
+	</li>
+	@endforeach
 </ul>
 @endif
 <div class="row">
@@ -38,6 +38,16 @@
 								<td>Harga Kopi</td>
 								<td>:</td>
 								<td>@rupiah($kopi->harga)</td>
+							</tr>
+							<tr>
+								<td>Data Dibuat</td>
+								<td>:</td>
+								<td>{{ $kopi['created_at']}}</td>
+							</tr>
+							<tr>
+								<td>Data Diupdate</td>
+								<td>:</td>
+								<td>{{ $kopi['updated_at']}}</td>
 							</tr>
 						</table>
 						<!-- <label for="exampleEmail" class="">Jenis Kopi</label> -->
@@ -101,13 +111,13 @@
 						<!-- <button type="reset" class="mb-2 mr-2 btn-icon btn-square btn btn-danger"><i class="lnr-undo btn-icon-wrapper"> </i>Reset</button> -->
 						<!-- <button type="submit" class="mb-2 mr-2 btn-icon btn-square btn btn-info"><i class="fa fa-check btn-icon-wrapper"> </i>Submit</button> -->
 						<!-- <input type="hidden" value="{{ csrf_token() }}" name="_token"> -->
-          				<!-- <input type="hidden" name="_method" value="put"> -->
+						<!-- <input type="hidden" name="_method" value="put"> -->
 
 					</center>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 <!-- <script>
 // Restricts input for the given textbox to the given inputFilter.
 function setInputFilter(textbox, inputFilter) {
@@ -132,8 +142,8 @@ setInputFilter(document.getElementById("harga"), function(value) {
 </script> -->
 @endsection
 
-                    @section('footer')
-                    <button class="btn btn-secondary btn-labeled btn-labeled-left btn-icon mr-2" onclick="window.location.href='{{ url()->previous() }}'"><span class="btn-label"><i class="ti-angle-left"></i></span>kembali</button>
-                    @endsection
+@section('footer')
+<button class="btn btn-secondary btn-labeled btn-labeled-left btn-icon mr-2" onclick="window.location.href='{{ url()->previous() }}'"><span class="btn-label"><i class="ti-angle-left"></i></span>kembali</button>
+@endsection
 
 

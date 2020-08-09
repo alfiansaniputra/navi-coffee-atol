@@ -25,8 +25,8 @@
 				<tr>
 					<th>No</th>
 					<th>Nama Kopi</th>
-					<th>jenis kopi</th>
-					<th>harga</th>
+					<th>Jenis kopi</th>
+					<th>Harga</th>
 					<th>Aksi</th>
 				</tr>
 			</thead>

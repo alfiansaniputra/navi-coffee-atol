@@ -23,9 +23,9 @@
 			<thead>
 				<tr>
 					<th>No</th>
-					<th>id_kopi</th>
-					<th>id_bahan_baku</th>
-					<th>qty</th>
+					<th>Nama Kopi</th>
+					<th>Bahan Baku</th>
+					<th>Banyak</th>
 					<th>Aksi</th>
 				</tr>
 			</thead>
@@ -35,9 +35,9 @@
 					<td>{{$i++}}</td>
 					<td>{{ $resep->kopi['nama_kopi']}}</td>
 					<td>{{ $resep->bahan_baku['nama_bahan_baku']}}</td>
-					<td>{{ $resep['qty']}}</td>
+					<td>{{ $resep['qty']}} Cup</td>
 					<td>
-						<!-- <a class="text-muted font-16 pl-2" href="{{url('admin/resep/')}}/{{$resep->id}}"><i class="fa fa-eye"></i></a> -->
+						<a class="text-muted font-16 pl-2" href="{{url('admin/resep/')}}/{{$resep->id}}"><i class="fa fa-eye"></i></a>
 						<a class="text-muted font-16 pl-2" href="{{url('admin/resep/')}}/{{$resep->id}}/edit"><i class="fa fa-pencil"></i></a>
 						<a class="text-muted font-16 pl-2" href="{{url('admin/resep/')}}/{{$resep->id}}/delete" onclick="return confirm('Apakah anda yakin ingin menghapus data {{ $resep['nama_resep']}} dari sistem?')"><i class="fa fa-trash"></i></a>
 					</td>

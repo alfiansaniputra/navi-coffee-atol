@@ -44,7 +44,7 @@ class AdminController extends Controller
 //data kopi
     public function kopi()
     {
-         $kopi = Kopi::all();
+         $kopi = Kopi::where('tampil','=','1')->get();
         // $kategori=Kategori::all();
         // $storage=Storage::all();
         // $warna=Warna::all();
@@ -94,7 +94,7 @@ class AdminController extends Controller
 //data suplier
     public function suplier()
     {
-         $suplier = Suplier::all();
+         $suplier = Suplier::where('tampil','=','1')->get();
          return view('suplier.index',compact('suplier'));
     }
     public function supliercreate()
@@ -136,19 +136,21 @@ class AdminController extends Controller
     public function suplierhapus($id)
     {
         $suplier = Suplier::find($id);
-        $suplier ->delete();
+        // $suplier ->delete();
+        $suplier->tampil = '0';
+        $suplier->save();
         return redirect('admin/suplier')->with('message','Data berhasil dihapus');
     }
 //data Bahan Baku
     public function bahanbaku()
     {
-         $bahanbaku = Bahan_baku::all();
-         $suplier = Suplier::all();
+         $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
+         $suplier = Suplier::where('tampil','=','1')->get();
          return view('bahanbaku.index',compact('bahanbaku','suplier'));
     }
     public function bahanbakucreate()
     {   
-         $suplier = Suplier::all();
+         $suplier = Suplier::where('tampil','=','1')->get();
          return view('bahanbaku.tambah',compact('suplier'));
     }
     public function bahanbakustore(Request $request)
@@ -164,7 +166,7 @@ class AdminController extends Controller
     public function bahanbakuedit($id)
     {
       $bahanbaku = Bahan_baku::find($id);
-      $suplier = Suplier::all();
+      $suplier = Suplier::where('tampil','=','1')->get();
       return view('bahanbaku.edit',compact('bahanbaku','suplier'));
     }
     public function bahanbakuupdate(Request $request, $id)
@@ -185,21 +187,23 @@ class AdminController extends Controller
     public function bahanbakuhapus($id)
     {
         $bahanbaku = Bahan_baku::find($id);
-        $bahanbaku ->delete();
+        // $bahanbaku ->delete();
+        $bahanbaku->tampil = '0';
+        $bahanbaku->save();
         return redirect('admin/bahanbaku')->with('message','Data berhasil dihapus');
     }
 //data Resep
     public function resep()
     {
-         $resep = Resep::all();
-         $kopi = Kopi::all();
-         $bahanbaku = Bahan_baku::all();
+         $resep = Resep::where('tampil','=','1')->get();
+         $kopi = Kopi::where('tampil','=','1')->get();
+         $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
          return view('resep.index',compact('resep','kopi','bahanbaku'));
     }
     public function resepcreate()
     {   
-         $kopi = Kopi::all();
-         $bahanbaku = Bahan_baku::all();
+         $kopi = Kopi::where('tampil','=','1')->get();
+         $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
          return view('resep.tambah',compact('kopi','bahanbaku'));
     }
     public function resepstore(Request $request)
@@ -214,8 +218,8 @@ class AdminController extends Controller
     public function resepedit($id)
     {
       $resep = Resep::find($id);
-      $kopi = Kopi::all();
-      $bahanbaku = Bahan_baku::all();
+      $kopi = Kopi::where('tampil','=','1')->get();
+      $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
       return view('resep.edit',compact('resep','kopi','bahanbaku'));
     }
     public function resepupdate(Request $request, $id)
@@ -230,14 +234,16 @@ class AdminController extends Controller
     public function resepdetail($id)
     {
       $resep = Resep::find($id);
-      $kopi = Kopi::all();
-      $bahanbaku = Bahan_baku::all();
+      $kopi = Kopi::where('tampil','=','1')->get();
+      $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
       return view('resep.detail',compact('resep','kopi','bahanbaku'));
     }
     public function resephapus($id)
     {
         $resep = Resep::find($id);
-        $resep ->delete();
+        // $resep ->delete();
+        $resep->tampil = '0';
+        $resep->save();
         return redirect('admin/resep')->with('message','Data berhasil dihapus');
     }
 //data pembelian
@@ -251,8 +257,8 @@ class AdminController extends Controller
     }
     // public function pembeliancreate()
     // {   
-    //      $kopi = Kopi::all();
-    //      $bahanbaku = Bahan_baku::all();
+    //      $kopi = Kopi::where('tampil','=','1')->get();
+    //      $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
     //      return view('pembelian.tambah',compact('kopi','bahanbaku'));
     // }
     // public function pembelianstore(Request $request)
@@ -267,8 +273,8 @@ class AdminController extends Controller
     public function pembelianedit($id)
     {
       $pembelian = Pembelian::find($id);
-      $kopi = Kopi::all();
-      $bahanbaku = Bahan_baku::all();
+      $kopi = Kopi::where('tampil','=','1')->get();
+      $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
       return view('pembelian.edit',compact('pembelian','kopi','bahanbaku'));
     }
     public function pembelianupdate(Request $request, $id)
@@ -283,8 +289,8 @@ class AdminController extends Controller
     public function pembeliandetail($id)
     {
       $pembelian = Pembelian::find($id);
-      $kopi = Kopi::all();
-      $bahanbaku = Bahan_baku::all();
+      $kopi = Kopi::where('tampil','=','1')->get();
+      $bahanbaku = Bahan_baku::where('tampil','=','1')->get();
       return view('pembelian.detail',compact('pembelian','kopi','bahanbaku'));
     }
     public function pembelianhapus($id)

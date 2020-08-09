@@ -14,14 +14,25 @@ Route::get('artikel', 'HomeController@artikel')->name('artikel');
 Route::get('detailartikel', 'HomeController@detailartikel')->name('detailartikel');
 Route::get('kontak', 'HomeController@kontak')->name('kontak');
 //eksperimen
-Route::get('add-to-cart/{id}', 'HomeController@addToCart');
-Route::patch('update-cart', 'HomeController@update');
-Route::delete('remove-from-cart', 'HomeController@remove');
-Route::get('cart', 'HomeController@cart');
-Route::get('konfirmasi', 'HomeController@konfirmasi');
-Route::post('checkout', 'HomeController@checkout');
-Route::get('pembayaran', 'HomeController@pembayaran');
 
+
+// Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function() {
+
+	Route::get('add-to-cart/{id}', 'PelangganController@addToCart');
+	Route::patch('update-cart', 'PelangganController@update');
+	Route::delete('remove-from-cart', 'PelangganController@remove');
+	Route::get('cart', 'PelangganController@cart');
+	Route::post('checkout', 'PelangganController@checkout');
+	Route::get('konfirmasi', 'PelangganController@konfirmasi');
+	Route::get('pembayaran/{id}', 'PelangganController@pembayaran');
+	Route::put('pembayaran/{id}','PelangganController@pembayaranupdate');
+	Route::get('profil','PelangganController@profil');
+	Route::get('transaksi','PelangganController@transaksi');
+	Route::get('riwayat-transaksi','PelangganController@riwayattransaksi');
+// });
+
+
+// Route::group(['prefix'=>'admin', 'namespace' => 'admin', 'middleware'=> 'auth:web,admin' ], function () {
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function() {
 	Route::get('dashboard', 'AdminController@index')->name('index');
 	//data kopi

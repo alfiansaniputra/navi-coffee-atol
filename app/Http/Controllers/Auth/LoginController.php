@@ -25,13 +25,21 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
+    public function authenticated()
+    {
+        if(auth()->user()->role == 'admin'){
+            return redirect()->route('admin.index');
+        }else{
+            return redirect('/');
+        }
+    }
     public function __construct()
     {
         $this->middleware('guest')->except('logout');

@@ -1,3 +1,6 @@
+@if(Auth::user()->role == 'pelanggan')
+    <script>window.location = "/";</script>
+@else 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -267,6 +270,8 @@
             });
         });
     </script>
+        
 
 </body>
 </html>
+@endif

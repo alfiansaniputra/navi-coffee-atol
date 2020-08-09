@@ -18,29 +18,34 @@
 					<div class="position-relative form-group">
 						<table class="table">
 							<tr>
-								<td>Nama bahanbaku</td>
+								<td>Nama Bahan Baku</td>
 								<td>:</td>
-								<td>{{$bahanbaku['nama_perusahaan']}}</td>
+								<td>{{ $bahanbaku['nama_bahan_baku']}}</td>
 							</tr>
 							<tr>
-								<td>No HP bahanbaku</td>
+								<td>Jenis Bahan Baku (satuan)</td>
 								<td>:</td>
-								<td>{{$bahanbaku['no_hp']}}</td>
+								<td>{{ $bahanbaku['jenis_bahan_baku']}}</td>
 							</tr>
 							<tr>
-								<td>Alamat bahanbaku</td>
+								<td>Stok</td>
 								<td>:</td>
-								<td>{{$bahanbaku['alamat']}}</td>
+								<td>{{ $bahanbaku['stok']}}</td>
 							</tr>
 							<tr>
-								<td>Provinsi</td>
+								<td>Suplier</td>
 								<td>:</td>
-								<td>{{ substr(preg_replace('/\d/', '', $bahanbaku['provinsi']), 1) }}</td>
+								<td>{{ $bahanbaku->suplier['nama_perusahaan']}}</td>
 							</tr>
 							<tr>
-								<td>Kota/Kabupaten</td>
+								<td>Data Dibuat</td>
 								<td>:</td>
-								<td>{{ substr(preg_replace('/\d/', '', $bahanbaku['kota']), 1) }}</td>
+								<td>{{ $bahanbaku['created_at']}}</td>
+							</tr>
+							<tr>
+								<td>Data Diupdate</td>
+								<td>:</td>
+								<td>{{ $bahanbaku['updated_at']}}</td>
 							</tr>
 						</table>
 					</div>

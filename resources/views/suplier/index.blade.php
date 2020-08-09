@@ -3,6 +3,7 @@
 {{request()->segment(count(request()->segments()))}}
 @endsection
 @section('content')
+    
 <div class="flexbox mb-4">
   <div class="flexbox">
 <a class="mb-2 mr-2 btn btn-primary active" href="{{route('admin.suplier-tambah')}}"><i class="fa fa-plus"></i> Tambah Data</a>
@@ -25,9 +26,9 @@
 					<th>No</th>
 					<th>Nama suplier</th>
 					<!-- <th>alamat</th> -->
-					<th>provinsi</th>
-					<th>kota</th>
-					<th>no_hp</th>
+					<th>Provinsi</th>
+					<th>Kota</th>
+					<th>No HP</th>
 					<th>Aksi</th>
 				</tr>
 			</thead>

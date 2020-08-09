@@ -24,10 +24,10 @@
 				<tr>
 					<th>No</th>
 
-					<th>nama_bahan_baku</th>
-					<th>jenis_bahan_baku</th>
-					<th>stok</th>
-					<th>id_supplier</th>
+					<th>Nama Bahan Baku</th>
+					<!-- <th>Jenis Bahan Baku (satuan)</th> -->
+					<th>Stok</th>
+					<th>Suplier</th>
 					<th>Aksi</th>
 				</tr>
 			</thead>
@@ -36,11 +36,11 @@
 				<tr>
 					<td>{{$i++}}</td>
 					<td>{{ $bahanbaku['nama_bahan_baku']}}</td>
-					<td>{{ $bahanbaku['jenis_bahan_baku']}}</td>
-					<td>{{ $bahanbaku['stok']}}</td>
+					<!-- <td>{{ $bahanbaku['jenis_bahan_baku']}}</td> -->
+					<td>{{ $bahanbaku['stok']}} {{ $bahanbaku['jenis_bahan_baku']}}</td>
 					<td>{{ $bahanbaku->suplier['nama_perusahaan']}}</td>
 					<td>
-						<!-- <a class="text-muted font-16 pl-2" href="{{url('admin/bahanbaku/')}}/{{$bahanbaku->id}}"><i class="fa fa-eye"></i></a> -->
+						<a class="text-muted font-16 pl-2" href="{{url('admin/bahanbaku/')}}/{{$bahanbaku->id}}"><i class="fa fa-eye"></i></a>
 						<a class="text-muted font-16 pl-2" href="{{url('admin/bahanbaku/')}}/{{$bahanbaku->id}}/edit"><i class="fa fa-pencil"></i></a>
 						<a class="text-muted font-16 pl-2" href="{{url('admin/bahanbaku/')}}/{{$bahanbaku->id}}/delete" onclick="return confirm('Apakah anda yakin ingin menghapus data {{ $bahanbaku['nama_bahanbaku']}} dari sistem?')"><i class="fa fa-trash"></i></a>
 					</td>

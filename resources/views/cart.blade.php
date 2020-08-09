@@ -17,6 +17,7 @@ margin: 30px;
 
 @endsection
 @section('content')
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -24,17 +25,18 @@ margin: 30px;
 -moz-background-size: cover;
 background-size: cover;
 -o-background-size: cover;
-height: 500px;">	
-<div class="container">
+height: 200px;">	
+
+<!-- <div class="container">
 	<div class="row height align-items-center justify-content-center">
 		<div class="col-lg-10">
 			<div class="generic-banner-content">
-				<h2 class="text-white">Navi Coffee bandung</h2>
-				<p class="text-white">Weekend nya udah beres, gak kerasa udah hari senin lagi nih. Tetap semangat ya kalian, seperti biasa jangan lupa ngopi!</p>
-			</div>							
+											<h2 class="text-white">Navi Coffee bandung</h2>
+											<p class="text-white">Weekend nya udah beres, gak kerasa udah hari senin lagi nih. Tetap semangat ya kalian, seperti biasa jangan lupa ngopi!</p>
+										</div>							
 		</div>
 	</div>
-</div>
+</div> -->
 </section>		
 <!-- End banner Area -->
 <div class="container pt-5">
@@ -44,7 +46,7 @@ height: 500px;">
 			<tr>
 				<th style="width:50%">Product</th>
 				<th style="width:10%">Harga</th>
-				<th style="width:8%">Quantity</th>
+				<th style="width:8%">Banyak</th>
 				<th style="width:22%" class="text-center">Subtotal</th>
 				<th style="width:10%"></th>
 			</tr>
@@ -84,15 +86,26 @@ height: 500px;">
 		</tbody>
 		<tfoot>
 			<tr class="visible-xs">
-				<td class="text-center text-strong"><strong>Total @rupiah($total)</strong></td>
+				<td class="text-right text-strong font-weight-bold" colspan="5"><strong> Total @rupiah($total)</strong></td>
 			</tr>
-			<tr>
-				<td><a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Lanjutkan Belanja</a></td>
-				<td colspan="2" class="hidden-xs"><a  class="btn btn-primary text-light" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-check"></i> Konfirmasi Belanja</a></td>
-				<td class="hidden-xs text-center"><strong>Total @rupiah($total)</strong></td>
-			</tr>
+			<script>
+				var g ={{$total}};
+			</script>
+			
 		</tfoot>
 	</table>
+	<div class="text-right font-weight-bold">
+		<h5>Terbilang : <strong id="nominal">Total @rupiah($total)</strong></h5>
+	</div>
+	<center>
+			<a href="{{ url('/') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Lanjutkan Belanja</a>
+			<a  class="btn btn-primary text-light" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-check"></i> Konfirmasi Belanja</a>
+			</center>
+	<div class="row mt-3 mb-5">
+
+			
+
+	</div>
 </div>
 <!-- Modal -->
 <!-- <button type="button" class="btn btn-primary" >
@@ -107,9 +120,9 @@ height: 500px;">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+<form action="{{url('checkout')}}" method="post">
 			<div class="modal-body p-5">
 				<div class="row">
-<form action="">
 					<div class="container text-center">
 						<h4>Silahkan Pilih Metode Pembayaran</h4>
 					</div>
@@ -118,13 +131,13 @@ height: 500px;">
 
 						<label for="exampleInputEmail1">Pilih Metode Pembayaran :</label>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+							<input class="form-check-input" type="radio" name="metode_pembayaran" id="exampleRadios1" value="ovo" checked>
 							<label class="form-check-label" for="exampleRadios1">
 								OVO
 							</label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+							<input class="form-check-input" type="radio" name="metode_pembayaran" id="exampleRadios2" value="gopay">
 							<label class="form-check-label" for="exampleRadios2">
 								GO - Pay
 							</label>
@@ -137,7 +150,7 @@ height: 500px;">
 							<small id="emailHelp" class="form-text text-muted">*sudah termasuk Ongkir dan Pajak Pendapatan 10%.</small>
 						</div>
 					</div>
-</form>
+
 
 
 				</div>
@@ -145,14 +158,14 @@ height: 500px;">
 			<div class="modal-footer d-flex justify-content-center">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
 				<button type="submit" class="btn btn-primary"><i class="fa fa-check btn-icon-wrapper"> </i> Konfirmasi Pembayaran</button>
+    <input type="hidden" value="{{ csrf_token() }}" name="_token">
 			</div>
+			</form>
 		</div>
 	</div>
 </div>
 @endsection
 @section('scripts')
-
-
 <script type="text/javascript">
 
 	$(".update-cart").click(function (e) {
@@ -187,6 +200,137 @@ height: 500px;">
 		}
 	});
 
+/*! Copyright (c) 2016 Naufal Rabbani (https://github.com/BosNaufal/terbilang-js)
+* Licensed Under MIT (http://opensource.org/licenses/MIT)
+*
+* Version 0.0.1
+*
+* Inspired By: http://notes.rioastamal.net/2012/03/membuat-fungsi-terbilang-pada-php.html
+*/
+
+// alert(terbilang(1555987643211111) + " Rupiah");
+document.getElementById("nominal").innerHTML = (terbilang(g) + " Rupiah");
+// console.log(terbilang(g) + " Rupiah");
+
+function terbilang(a){
+	var bilangan = ['','Satu','Dua','Tiga','Empat','Lima','Enam','Tujuh','Delapan','Sembilan','Sepuluh','Sebelas'];
+
+	// 1 - 11
+	if(a < 12){
+		var kalimat = bilangan[a];
+	}
+	// 12 - 19
+	else if(a < 20){
+		var kalimat = bilangan[a-10]+' Belas';
+	}
+	// 20 - 99
+	else if(a < 100){
+		var utama = a/10;
+		var depan = parseInt(String(utama).substr(0,1));
+		var belakang = a%10;
+		var kalimat = bilangan[depan]+' Puluh '+bilangan[belakang];
+	}
+	// 100 - 199
+	else if(a < 200){
+		var kalimat = 'Seratus '+ terbilang(a - 100);
+	}
+	// 200 - 999
+	else if(a < 1000){
+		var utama = a/100;
+		var depan = parseInt(String(utama).substr(0,1));
+		var belakang = a%100;
+		var kalimat = bilangan[depan] + ' Ratus '+ terbilang(belakang);
+	}
+	// 1,000 - 1,999
+	else if(a < 2000){
+		var kalimat = 'Seribu '+ terbilang(a - 1000);
+	}
+	// 2,000 - 9,999
+	else if(a < 10000){
+		var utama = a/1000;
+		var depan = parseInt(String(utama).substr(0,1));
+		var belakang = a%1000;
+		var kalimat = bilangan[depan] + ' Ribu '+ terbilang(belakang);
+	}
+	// 10,000 - 99,999
+	else if(a < 100000){
+		var utama = a/100;
+		var depan = parseInt(String(utama).substr(0,2));
+		var belakang = a%1000;
+		var kalimat = terbilang(depan) + ' Ribu '+ terbilang(belakang);
+	}
+	// 100,000 - 999,999
+	else if(a < 1000000){
+		var utama = a/1000;
+		var depan = parseInt(String(utama).substr(0,3));
+		var belakang = a%1000;
+		var kalimat = terbilang(depan) + ' Ribu '+ terbilang(belakang);
+	}
+	// 1,000,000 - 	99,999,999
+	else if(a < 100000000){
+		var utama = a/1000000;
+		var depan = parseInt(String(utama).substr(0,4));
+		var belakang = a%1000000;
+		var kalimat = terbilang(depan) + ' Juta '+ terbilang(belakang);
+	}
+	else if(a < 1000000000){
+		var utama = a/1000000;
+		var depan = parseInt(String(utama).substr(0,4));
+		var belakang = a%1000000;
+		var kalimat = terbilang(depan) + ' Juta '+ terbilang(belakang);
+	}
+	else if(a < 10000000000){
+		var utama = a/1000000000;
+		var depan = parseInt(String(utama).substr(0,1));
+		var belakang = a%1000000000;
+		var kalimat = terbilang(depan) + ' Milyar '+ terbilang(belakang);
+	}
+	else if(a < 100000000000){
+		var utama = a/1000000000;
+		var depan = parseInt(String(utama).substr(0,2));
+		var belakang = a%1000000000;
+		var kalimat = terbilang(depan) + ' Milyar '+ terbilang(belakang);
+	}
+	else if(a < 1000000000000){
+		var utama = a/1000000000;
+		var depan = parseInt(String(utama).substr(0,3));
+		var belakang = a%1000000000;
+		var kalimat = terbilang(depan) + ' Milyar '+ terbilang(belakang);
+	}
+	else if(a < 10000000000000){
+		var utama = a/10000000000;
+		var depan = parseInt(String(utama).substr(0,1));
+		var belakang = a%10000000000;
+		var kalimat = terbilang(depan) + ' Triliun '+ terbilang(belakang);
+	}
+	else if(a < 100000000000000){
+		var utama = a/1000000000000;
+		var depan = parseInt(String(utama).substr(0,2));
+		var belakang = a%1000000000000;
+		var kalimat = terbilang(depan) + ' Triliun '+ terbilang(belakang);
+	}
+
+	else if(a < 1000000000000000){
+		var utama = a/1000000000000;
+		var depan = parseInt(String(utama).substr(0,3));
+		var belakang = a%1000000000000;
+		var kalimat = terbilang(depan) + ' Triliun '+ terbilang(belakang);
+	}
+
+  else if(a < 10000000000000000){
+		var utama = a/1000000000000000;
+		var depan = parseInt(String(utama).substr(0,1));
+		var belakang = a%1000000000000000;
+		var kalimat = terbilang(depan) + ' Kuadriliun '+ terbilang(belakang);
+	}
+
+	var pisah = kalimat.split(' ');
+	var full = [];
+	for(var i=0;i<pisah.length;i++){
+	 if(pisah[i] != ""){full.push(pisah[i]);}
+	}
+	return full.join(' ');
+}
 </script>
 
 @endsection
